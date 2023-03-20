@@ -1,30 +1,15 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <p>Are you searching for the perfect personalized gift for someone who enjoys puzzles? You found it!</p>
+    <p>What better way to surprise your friend, coworker, or loved one? Show them that you care by sending them their own
+      personalized puzzle book today!</p>
+    <p>Search for their name to see what books are available:</p>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <SearchBooks />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script setup>
+import SearchBooks from './components/SearchBooks.vue'
+</script>
+
+<style scoped></style>
