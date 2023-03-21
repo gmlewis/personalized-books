@@ -1,8 +1,10 @@
 <template>
   <input v-model="name">
-  <div v-if="!!shortcut">Shortcut: <a :href="shortcut">{{ shortcut }}</a></div>
-  <div v-for="book in books">
-    <DisplayBook :book="book" />
+  <div v-if="!!shortcut" class="shortcut">Shortcut: <a :href="shortcut">{{ shortcut }}</a></div>
+  <div class="books">
+    <div v-for="book in books" class="book">
+      <DisplayBook :book="book" />
+    </div>
   </div>
 </template>
 
@@ -38,4 +40,24 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.books {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.book {
+  width: 30%;
+}
+
+.shortcut {
+  margin: 1rem auto;
+}
+
+input {
+  font: inherit;
+}
+</style>
