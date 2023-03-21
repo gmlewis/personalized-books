@@ -30,10 +30,15 @@ const props = defineProps({
       object-fit: contain;
       width: 100%;
       height: 20rem;
+      user-select: none;
     }
 
     &>.book-info {
       font-size: 1.2rem;
+
+      &::selection {
+        color: rgba(255, 255, 255, 0.87);
+      }
     }
   }
 
