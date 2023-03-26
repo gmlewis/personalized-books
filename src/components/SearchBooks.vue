@@ -36,8 +36,9 @@ watch(name, () => newSearch())
 onMounted(() => {
   const search = window.location.search
   if (!search.startsWith('?q=')) { return }
-  const q = search.substring(3)
+  const q = search.substring(3).replace(/[^a-z]+/ig, '')
   if (!q) { return }
+  document.title = `Personalized books for ${q} by Glenn Lewis`
   name.value = q
   newSearch()
 })
