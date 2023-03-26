@@ -28,6 +28,7 @@ const newSearch = () => {
     return
   }
   books.value = lookup
+  document.title = `Personalized books for ${name.value} by Glenn Lewis`
   shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${name.value}`
 }
 
@@ -38,7 +39,6 @@ onMounted(() => {
   if (!search.startsWith('?q=')) { return }
   const q = search.substring(3).replace(/[^a-z]+/ig, '')
   if (!q) { return }
-  document.title = `Personalized books for ${q} by Glenn Lewis`
   name.value = q
   newSearch()
 })
