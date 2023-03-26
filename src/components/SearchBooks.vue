@@ -21,6 +21,7 @@ const books = ref([])
 const shortcut = ref('')
 
 const newSearch = () => {
+  name.value = name.value.replace(/[^a-z]+/ig, '')
   const lookup = booksByName[name.value.toLowerCase()]
   if (!lookup) {
     books.value = []
