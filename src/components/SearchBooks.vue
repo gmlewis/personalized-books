@@ -23,8 +23,9 @@ const shortcut = ref('')
 const newSearch = () => {
   const lookup = booksByName[name.value.toLowerCase()]
   if (!lookup) {
-    shortcut.value = ''
     books.value = []
+    document.title = `Personalized books by Glenn Lewis`
+    shortcut.value = ''
     return
   }
   books.value = lookup
