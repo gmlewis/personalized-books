@@ -31,7 +31,8 @@ const newSearch = () => {
   }
   books.value = lookup
   document.title = `Personalized books for ${name.value} by Glenn Lewis`
-  shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${name.value}`
+  const queryName = name.value.charAt(0).toUpperCase() + name.value.slice(1)
+  shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${queryName}`
 }
 
 watch(name, () => newSearch())
