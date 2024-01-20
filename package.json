@@ -15,7 +15,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.3.3",
     "sass": "^1.66.1",
-    "vite": "^4.4.12",
+    "vite": "^4.5.2",
     "postcss": ">=8.4.31"
   }
 }
