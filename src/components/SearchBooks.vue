@@ -13,7 +13,7 @@
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import { booksByName } from './books-by-name'
+import { booksByName } from './books-by-name.js'
 import DisplayBook from './DisplayBook.vue'
 
 const name = ref('')
