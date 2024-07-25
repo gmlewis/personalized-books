@@ -36,12 +36,13 @@ const newSearch = async () => {
     return
   }
   books.value = lookup
-  if (lookup.length === 9) {
+  const queryName = name.value.charAt(0).toUpperCase() + name.value.slice(1)
+  if (lookup.length === 9 && lookup[0][0].includes(` ${queryName} `)) {
     document.title = `Personalized books for ${name.value} by Glenn Lewis`
-    const queryName = name.value.charAt(0).toUpperCase() + name.value.slice(1)
     shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${queryName}`
     similarMatches.value = ''
   } else {
+    shortcut.value = ''
     similarMatches.value = 'Similar matches:'
   }
 }
