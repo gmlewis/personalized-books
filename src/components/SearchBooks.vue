@@ -4,6 +4,7 @@
     <span></span>
   </span>
   <div v-if="!!shortcut" class="shortcut">Shortcut: <a :href="shortcut">{{ shortcut }}</a></div>
+  <div v-if="!!similarMatches" class="shortcut">{{ similarMatches }}</div>
   <div class="books">
     <div v-for="book in books" class="book">
       <DisplayBook :book="book" />
@@ -13,38 +14,110 @@
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import { booksByName } from './books-by-name.js'
 import DisplayBook from './DisplayBook.vue'
+
+// const searchUrl = 'http://localhost:3000/search'
+const searchUrl = 'https://on-demand-books-com-kzfxdscz.fermyon.app/search'
 
 const name = ref('')
 const books = ref([])
 const shortcut = ref('')
+const similarMatches = ref('')
 
-const newSearch = () => {
+const newSearch = async () => {
   name.value = name.value.replace(/[^a-z]+/ig, '')
-  const lookup = booksByName[name.value.toLowerCase()]
-  if (!lookup) {
+  // const lookup = booksByName[name.value.toLowerCase()]
+  const lookup = await fetchName(name.value.toLowerCase())
+  if (!lookup?.length) {
     books.value = []
     document.title = `Personalized books by Glenn Lewis`
     shortcut.value = ''
+    similarMatches.value = ''
     return
   }
   books.value = lookup
-  document.title = `Personalized books for ${name.value} by Glenn Lewis`
-  const queryName = name.value.charAt(0).toUpperCase() + name.value.slice(1)
-  shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${queryName}`
+  if (lookup.length === 9) {
+    document.title = `Personalized books for ${name.value} by Glenn Lewis`
+    const queryName = name.value.charAt(0).toUpperCase() + name.value.slice(1)
+    shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${queryName}`
+    similarMatches.value = ''
+  } else {
+    similarMatches.value = 'Similar matches:'
+  }
 }
 
-watch(name, () => newSearch())
+watch(name, async () => await newSearch())
 
-onMounted(() => {
+onMounted(async () => {
   const search = window.location.search
   if (!search.startsWith('?q=')) { return }
   const q = search.substring(3).replace(/[^a-z]+/ig, '')
   if (!q) { return }
   name.value = q
-  newSearch()
+  await newSearch()
 })
+
+const fetchName = async (name) => {
+  const url = `${searchUrl}/${encodeURIComponent(name)}`
+  return await getJsonHttpsCall({ url })
+}
+
+// Adapted from: https://dmitripavlutin.com/timeout-fetch-request/
+const fetchWithTimeout = async (resource, options = {}) => {
+  const { timeout = 8000 } = options  // 8000 ms = 8 seconds
+
+  const controller = new AbortController()
+  const id = setTimeout(() => controller.abort(), timeout)
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal,
+  })
+  clearTimeout(id)
+  return response
+}
+
+const executeHttpsCall = async ({ url, fetchParams }) => {
+  try {
+    // console.log(`fetchParams.body=${fetchParams.body}`)
+    const response = await fetchWithTimeout(url, fetchParams)
+    // console.log('response:', response)
+    if (!response.ok) {
+      const text = await response.text()
+      const msg = `HTTP error, status=${response.status}, text=${text}`
+      return { error: msg }
+    }
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      return {}  // successful call with no JSON response (e.g. a 'PUT' call)
+    }
+    const result = await response.json()
+    // console.log('result:', result)
+    if (!result) {
+      return { error: 'no result' }
+    }
+    return result
+  } catch (e) {
+    if (e.name === 'AbortError') {
+      return { error: 'timeout error' }
+    } else {
+      return { error: e }
+    }
+  }
+}
+
+const getJsonHttpsCall = async ({ url, timeout }) => {
+  const fetchParams = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      // Authorization: 'Bearer ' + window.parent.access_token,
+      'Content-Type': 'application/json',
+    },
+    timeout,
+  }
+
+  return await executeHttpsCall({ url, fetchParams })
+}
 </script>
 
 <style lang="scss" scoped>
