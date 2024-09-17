@@ -2,9 +2,10 @@
   <div class="paragraphs">
     <p>Are you searching for the perfect personalized gift for someone who enjoys puzzles?</p>
     <p><strong>You found it!</strong></p>
-    <p>What better way to surprise your friends, coworkers, or loved ones? Show them that you care by sending them their
+    <p>What better way to surprise your friends, coworkers, or loved ones?<br>
+      Show them that you care by sending them their
       own personalized puzzle books today!</p>
-    <p>Search for a name to see what books are available:</p>
+    <p>Search for a name to see available books:</p>
   </div>
   <SearchBooks />
 </template>
