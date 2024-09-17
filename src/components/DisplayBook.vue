@@ -1,6 +1,6 @@
 <template>
   <div class="book-container">
-    <a :href="`https://on-demand-books.com/products/${url2handle(book[1])}`">
+    <a :href="shopifyUrl" @click.prevent="jumpTo">
       <img :src="book[3]" width="384" height="576">
       <span class="book-info">{{ book[0] }}
         (ISBN: {{ book[2] }})</span>
@@ -9,12 +9,20 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   book: Array,
 })
 
+const shopifyUrl = computed(() => `https://on-demand-books.com/products/${url2handle(props.book[1])}`)
+
 const url2handle = (url) => {
   return url.replace(/^.*product\-/, '').replace(/\.html$/, '')
+}
+
+const jumpTo = () => {
+  window.parent.location = shopifyUrl.value
 }
 </script>
 

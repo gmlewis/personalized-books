@@ -12,7 +12,7 @@
   <div v-if="!books.length">
     <div class="top-space">Other Available Titles</div>
     <div class="books">
-      <div v-for="book in otherBooks" class="book">
+      <div v-for="book in otherBooks.slice(0, 9)" class="book">
         <DisplayBook :book="book" />
       </div>
     </div>
