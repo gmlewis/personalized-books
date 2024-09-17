@@ -129,6 +129,7 @@ const getJsonHttpsCall = async ({ url, timeout }) => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  padding-top: 2rem;
 }
 
 .book {
