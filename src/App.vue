@@ -1,7 +1,7 @@
 <template>
   <div class="paragraphs">
     <p>Are you searching for the perfect personalized gift for someone who enjoys puzzles?</p>
-    <p><b>You found it!</b></p>
+    <p><strong>You found it!</strong></p>
     <p>What better way to surprise your friends, coworkers, or loved ones? Show them that you care by sending them their
       own personalized puzzle books today!</p>
     <p>Search for a name to see what books are available:</p>
@@ -10,9 +10,7 @@
 </template>
 
 <script setup>
-import { otherBooks } from './components/books-by-name.js'
 import SearchBooks from './components/SearchBooks.vue'
-import DisplayBook from './components/DisplayBook.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +27,11 @@ import DisplayBook from './components/DisplayBook.vue'
 
 h2 {
   padding-bottom: 2rem;
+}
+
+strong {
+  font-weight: 900;
+  font-size: larger;
 }
 
 .top-space {

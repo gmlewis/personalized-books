@@ -4,9 +4,17 @@
     <span></span>
   </span>
   <div v-if="!!similarMatches" class="shortcut">{{ similarMatches }}</div>
-  <div class="books">
+  <div class="books" v-if="!!books.length">
     <div v-for="book in books" class="book">
       <DisplayBook :book="book" />
+    </div>
+  </div>
+  <div v-if="!books.length">
+    <h1 class="top-space">Other Available Titles</h1>
+    <div class="books">
+      <div v-for="book in otherBooks" class="book">
+        <DisplayBook :book="book" />
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +24,7 @@
 
 import { onMounted, ref, watch } from 'vue'
 import DisplayBook from './DisplayBook.vue'
+import { otherBooks } from './books-by-name.js'
 
 // const searchUrl = 'http://localhost:3000/search'
 const searchUrl = 'https://on-demand-books-com-kzfxdscz.fermyon.app/search'
