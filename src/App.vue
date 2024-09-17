@@ -5,7 +5,7 @@
     <p>What better way to surprise your friends, coworkers, or loved ones?<br>
       Show them that you care by sending them their
       own personalized puzzle books today!</p>
-    <p>Search for a name to see available books:</p>
+    <h2>Search for a name to see available books:</h2>
   </div>
   <SearchBooks />
 </template>
@@ -27,7 +27,7 @@ import SearchBooks from './components/SearchBooks.vue'
 }
 
 h2 {
-  padding-bottom: 2rem;
+  padding-bottom: 0rem;
 }
 
 strong {

@@ -10,7 +10,7 @@
     </div>
   </div>
   <div v-if="!books.length">
-    <h1 class="top-space">Other Available Titles</h1>
+    <div class="top-space">Other Available Titles</div>
     <div class="books">
       <div v-for="book in otherBooks" class="book">
         <DisplayBook :book="book" />
@@ -143,6 +143,10 @@ const getJsonHttpsCall = async ({ url, timeout }) => {
 
 .book {
   width: 30%;
+}
+
+.top-space {
+  padding-top: 2rem;
 }
 
 .shortcut {
