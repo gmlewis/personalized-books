@@ -1,6 +1,6 @@
 <template>
   <div class="book-container">
-    <a :href="`https://lulu.com/${book[1]}`">
+    <a :href="`https://on-demand-books.com/products/${url2handle(book[1])}`">
       <img :src="book[3]" width="384" height="576">
       <span class="book-info">{{ book[0] }}
         (ISBN: {{ book[2] }})</span>
@@ -13,6 +13,9 @@ const props = defineProps({
   book: Array,
 })
 
+const url2handle = (url) => {
+  return url.replace(/^.*product\-/, '').replace(/\.html$/, '')
+}
 </script>
 
 <style lang="scss" scoped>

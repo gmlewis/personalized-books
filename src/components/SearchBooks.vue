@@ -3,7 +3,6 @@
     <input v-model="name" placeholder="Name">
     <span></span>
   </span>
-  <div v-if="!!shortcut" class="shortcut">Shortcut: <a :href="shortcut">{{ shortcut }}</a></div>
   <div v-if="!!similarMatches" class="shortcut">{{ similarMatches }}</div>
   <div class="books">
     <div v-for="book in books" class="book">
@@ -13,6 +12,8 @@
 </template>
 
 <script setup>
+// <div v-if="!!shortcut" class="shortcut">Shortcut: <a :href="shortcut">{{ shortcut }}</a></div>
+
 import { onMounted, ref, watch } from 'vue'
 import DisplayBook from './DisplayBook.vue'
 
@@ -30,7 +31,7 @@ const newSearch = async () => {
   const lookup = await fetchName(name.value.toLowerCase())
   if (!lookup?.length) {
     books.value = []
-    document.title = `Personalized books by Glenn Lewis`
+    document.title = `Personalized books`
     shortcut.value = ''
     similarMatches.value = ''
     return
@@ -38,7 +39,7 @@ const newSearch = async () => {
   books.value = lookup
   const queryName = name.value.charAt(0).toUpperCase() + name.value.slice(1)
   if (lookup.length === 9 && lookup[0][0].includes(` ${queryName} `)) {
-    document.title = `Personalized books for ${name.value} by Glenn Lewis`
+    document.title = `Personalized books for ${name.value}`
     shortcut.value = `https://gmlewis.github.io/personalized-books/?q=${queryName}`
     similarMatches.value = ''
   } else {
