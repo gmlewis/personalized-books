@@ -1,3 +1,6 @@
+packages:
+  - '.'
+
 overrides:
   esbuild@<=0.24.2: '>=0.25.0'
   immutable@>=4.0.0-rc.1 <4.3.8: '>=4.3.8'
