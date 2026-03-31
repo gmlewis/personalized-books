@@ -1,6 +1,6 @@
 <template>
   <span class="input">
-    <input v-model="name" placeholder="Name">
+    <input v-model="name" placeholder="Name" autofocus>
     <span></span>
   </span>
   <div v-if="!!similarMatches" class="shortcut">{{ similarMatches }}</div>
