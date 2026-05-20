@@ -40,12 +40,8 @@ jobs:
         with:
           node-version: 24
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
+      - name: Enable corepack
+        run: corepack enable
 
       - name: Get pnpm store directory
         id: pnpm-cache
