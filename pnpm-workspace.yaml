@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - ws@8.20.1
