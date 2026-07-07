@@ -1,4 +1,7 @@
 packages:
   - "."
+minimumReleaseAgeExclude:
+  - ws@8.21.0
+  - vite@8.0.16
 overrides:
   js-cookie: "3.0.7"
